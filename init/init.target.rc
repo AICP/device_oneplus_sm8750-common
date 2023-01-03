@@ -85,8 +85,8 @@ on fs
 
 on post-fs
     #Execute virtualization manager
-    enable vendor.qvirtmgr
-    start  vendor.qvirtmgr
+    enable vendor.qvirtservice
+    start  vendor.qvirtservice
 
 on late-fs
     mount_all --late
