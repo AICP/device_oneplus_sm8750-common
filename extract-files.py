@@ -1,6 +1,6 @@
 #!/usr/bin/env -S PYTHONPATH=../../../tools/extract-utils python3
 #
-# SPDX-FileCopyrightText: 2024 The LineageOS Project
+# SPDX-FileCopyrightText: 2024-2025 The LineageOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -9,7 +9,6 @@ from extract_utils.fixups_blob import (
     blob_fixups_user_type,
 )
 from extract_utils.fixups_lib import (
-    lib_fixup_remove,
     lib_fixups,
     lib_fixups_user_type,
 )
@@ -29,101 +28,108 @@ namespace_imports = [
 ]
 
 
-def lib_fixup_odm_suffix(lib: str, partition: str, *args, **kwargs):
-    return f'{lib}_{partition}' if partition == 'odm' else None
-
-
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
 
+def lib_fixup_odm_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_{partition}' if partition == 'odm' else None
 
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
-        'libpwirisfeature',
-        'libpwirishalwrapper',
-    ): lib_fixup_odm_suffix,
-    (
         'com.qualcomm.qti.dpm.api@1.0',
-        'libQnnCpu',
-        'libQnnHtp',
-        'libQnnHtpPrepare',
-        'libQnnHtpV73Stub',
-        'libhwconfigurationutil',
-        'vendor.oplus.hardware.cammidasservice-V1-ndk',
-        'vendor.oplus.hardware.communicationcenter-V2-ndk',
-        'vendor.pixelworks.hardware.display@1.0',
-        'vendor.pixelworks.hardware.display@1.1',
-        'vendor.pixelworks.hardware.display@1.2',
-        'vendor.pixelworks.hardware.feature@1.0',
-        'vendor.pixelworks.hardware.feature@1.1',
-        'vendor.qti.diaghal@1.0',
-        'vendor.qti.hardware.dpmservice@1.0',
-        'vendor.qti.hardware.qccsyshal@1.0',
-        'vendor.qti.hardware.qccsyshal@1.1',
-        'vendor.qti.hardware.qccsyshal@1.2',
-        'vendor.qti.hardware.qccvndhal@1.0',
-        'vendor.qti.hardware.wifidisplaysession@1.0',
-        'vendor.qti.imsrtpservice@3.0',
-        'vendor.qti.imsrtpservice@3.1',
+        'vendor.qti.ImsRtpService-V1-ndk',
+        'vendor.qti.diaghal-V1-ndk',
+        'vendor.qti.hardware.dpmaidlservice-V1-ndk',
+        'vendor.qti.hardware.wifidisplaysession_aidl-V1-ndk',
+        'vendor.qti.qccsyshal_aidl-V1-ndk',
+        'vendor.qti.qccvndhal_aidl-V1-ndk',
     ): lib_fixup_vendor_suffix,
     (
-        'libar-acdb',
-        'libar-gsl',
-        'liblx-osal',
-        'libats',
-        'libagmclient',
-        'libpalclient',
-        'vendor.qti.hardware.AGMIPC@1.0-impl',
-    ): lib_fixup_remove,
+        'vendor.oplus.hardware.displaypanelfeature-V1-ndk',
+    ): lib_fixup_odm_suffix,
 }
 
 blob_fixups: blob_fixups_user_type = {
     'odm/bin/hw/vendor.oplus.hardware.biometrics.fingerprint@2.1-service_uff': blob_fixup()
-        .add_needed('libshims_aidl_fingerprint_v2.oplus.so'),
-    'odm/bin/hw/vendor.oplus.hardware.charger-V6-service': blob_fixup()
-        .add_needed('libbase_shim.so'),
+        .add_needed('libshims_aidl_fingerprint_v3.oplus.so'),
     'odm/lib64/libAlgoProcess.so': blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V3-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
-    ('odm/lib64/libCOppLceTonemapAPI.so', 'odm/lib64/libCS.so', 'odm/lib64/libSuperRaw.so', 'odm/lib64/libYTCommon.so', 'odm/lib64/libyuv2.so'): blob_fixup()
-        .replace_needed('libstdc++.so', 'libstdc++_vendor.so'),
-    ('odm/lib64/libHIS.so', 'odm/lib64/libOGLManager.so'): blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V5-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
+    (
+        'odm/lib64/libAncHumanSegFigureFusion.so',
+        'odm/lib64/libEIS.so',
+        'odm/lib64/libHIS.so',
+        'odm/lib64/libOPAlgoCamAiBeautyFaceRetouchCn.so',
+        'odm/lib64/libOPAlgoCamAiUnifySkin.so',
+        'odm/lib64/libOPAlgoCamFaceBeautyCap.so',
+    ): blob_fixup()
+        .clear_symbol_version('AHardwareBuffer_acquire')
         .clear_symbol_version('AHardwareBuffer_allocate')
         .clear_symbol_version('AHardwareBuffer_describe')
         .clear_symbol_version('AHardwareBuffer_lock')
+        .clear_symbol_version('AHardwareBuffer_lockPlanes')
         .clear_symbol_version('AHardwareBuffer_release')
         .clear_symbol_version('AHardwareBuffer_unlock'),
-    'odm/lib64/libarcsoft_high_dynamic_range_v4.so': blob_fixup()
-        .clear_symbol_version('remote_handle_close')
-        .clear_symbol_version('remote_handle_invoke')
-        .clear_symbol_version('remote_handle_open')
-        .clear_symbol_version('remote_register_buf_attr')
-        .clear_symbol_version('remote_register_buf'),
-    'odm/lib64/libextensionlayer.so': blob_fixup()
-        .replace_needed('libziparchive.so', 'libziparchive_odm.so'),
     'product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml': blob_fixup()
         .regex_replace('/my_product', '/product'),
     'system_ext/bin/wfdservice64': blob_fixup()
         .add_needed('libwfdservice_shim.so'),
-    'system_ext/lib64/libwfdnative.so': blob_fixup()
-        .replace_needed('android.hidl.base@1.0.so', 'libhidlbase.so'),
     'system_ext/lib64/libwfdservice.so': blob_fixup()
         .replace_needed('android.media.audio.common.types-V2-cpp.so', 'android.media.audio.common.types-V4-cpp.so'),
-    ('vendor/bin/hw/android.hardware.security.keymint-service-qti', 'vendor/lib64/libqtikeymint.so'): blob_fixup()
-        .add_needed('android.hardware.security.rkp-V3-ndk.so'),
     'vendor/etc/libnfc-nci.conf': blob_fixup()
         .regex_replace('NFC_DEBUG_ENABLED=1', 'NFC_DEBUG_ENABLED=0'),
     'vendor/etc/libnfc-nxp.conf': blob_fixup()
         .regex_replace('(NXPLOG_.*_LOGLEVEL)=0x03', '\\1=0x02')
         .regex_replace('NFC_DEBUG_ENABLED=1', 'NFC_DEBUG_ENABLED=0'),
-    'vendor/etc/media_codecs_kalama.xml': blob_fixup()
+    'vendor/etc/media_codecs_sun.xml': blob_fixup()
         .regex_replace('.*media_codecs_(google_audio|google_c2|google_telephony|google_video|vendor_audio).*\n', ''),
-    'vendor/etc/seccomp_policy/qwesd@2.0.policy': blob_fixup()
-        .add_line_if_missing('pipe2: 1'),
+    (
+        'vendor/lib64/camera/components/com.qti.node.dewarp.so',
+        'vendor/lib64/hw/com.qti.chi.override.so',
+        'vendor/lib64/libcamximageformatutils.so',
+        'vendor/lib64/libchifeature2.so',
+        'vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.graphics.allocator-V1-ndk.so', 'android.hardware.graphics.allocator-V2-ndk.so'),
+    (
+        'vendor/lib64/hw/libaudiocorehal.default.so',
+        'vendor/lib64/libaudioplatformconverter.qti.so',
+        'vendor/lib64/libqtigefar.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.audio.core-V2-ndk.so', 'android.hardware.audio.core-V3-ndk.so')
+        .replace_needed('android.media.audio.common.types-V3-ndk.so', 'android.media.audio.common.types-V4-ndk.so'),
+    'vendor/lib64/hw/libaudiocorehal.qti.so': blob_fixup()
+        .replace_needed('android.media.audio.common.types-V3-ndk.so', 'android.media.audio.common.types-V4-ndk.so')
+        .replace_needed('android.hardware.audio.core-V2-ndk.so', 'android.hardware.audio.core-V3-ndk.so')
+        .replace_needed('android.hardware.audio.effect-V2-ndk.so', 'android.hardware.audio.effect-V3-ndk.so')
+        .replace_needed('android.hardware.audio.core.sounddose-V1-ndk.so', 'android.hardware.audio.core.sounddose-V3-ndk.so')
+        .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so'),
+    'vendor/lib64/hw/android.hardware.bluetooth.audio_sw.so': blob_fixup()
+        .replace_needed('android.hardware.audio.core-V2-ndk.so', 'android.hardware.audio.core-V3-ndk.so')
+        .replace_needed('android.media.audio.common.types-V3-ndk.so', 'android.media.audio.common.types-V4-ndk.so')
+        .replace_needed('android.hardware.bluetooth.audio-V4-ndk.so', 'android.hardware.bluetooth.audio-V5-ndk.so'),
+    (
+        'vendor/lib64/btaudio_offload_if.so',
+        'vendor/lib64/hw/android.hardware.bluetooth.audio-impl-qti.so',
+        'vendor/lib64/hw/audio.bluetooth_qti.default.so',
+        'vendor/lib64/libbluetooth_audio_session_aidl_qti.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.bluetooth.audio-V4-ndk.so', 'android.hardware.bluetooth.audio-V5-ndk.so'),
+    (
+        'vendor/lib64/libapengine.so',
+        'vendor/lib64/libqti-perfd.so',
+    ): blob_fixup()
+        .replace_needed('vendor.qti.hardware.display.config-V5-ndk.so', 'vendor.qti.hardware.display.config-V12-ndk.so'),
+    (
+        'vendor/lib64/libcwb_qcom_aidl.so',
+        'vendor/lib64/libsdmclient.so',
+    ): blob_fixup()
+        .replace_needed('vendor.qti.hardware.display.config-V11-ndk.so', 'vendor.qti.hardware.display.config-V12-ndk.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
-    'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
-        .add_needed('libhidlbase_shim.so'),
+    'vendor/lib64/libwfdmmsrc_proprietary.so': blob_fixup()
+        .replace_needed('android.media.audio.common.types-V2-ndk.so', 'android.media.audio.common.types-V4-ndk.so')
+        .replace_needed('android.hardware.audio.core-V2-ndk.so', 'android.hardware.audio.core-V3-ndk.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
