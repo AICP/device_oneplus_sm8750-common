@@ -5,14 +5,11 @@
 #
 
 import /odm/etc/init/hw/init.oplus.display.rc
+import /odm/etc/init/hw/init.oplus.wifi.rc
 
 on fs
     # Update touchpanel firmware in case we ship newer firmware in /odm
     write /proc/touchpanel/tp_fw_update 0
-
-on boot
-    # Display
-    chmod 0000 /sys/kernel/oplus_display/hbm
 
 on post-fs-data
     # ADSP ramdump
@@ -25,16 +22,7 @@ on property:ro.boot.prjname=*
     # Display
     setprop ro.separate.soft ${ro.boot.prjname}
 
-on property:ro.boot.prjname=22811
-    setprop persist.vendor.display.pxlw.iris_feature 0x407f0780
-
-on property:ro.boot.prjname=22861
-    setprop persist.vendor.display.pxlw.iris_feature 0x400080
-
 on property:sys.boot_completed=1
-    # Charging
-    chown system system /dev/oplus_chg
-
     # Widevine
     copy /vendor/etc/oplus_Widevine_licenses.pfm /mnt/vendor/persist/data/pfm/licenses/oplus_Widevine_licenses.pfm
     chmod 0600 /mnt/vendor/persist/data/pfm/licenses/oplus_Widevine_licenses.pfm
