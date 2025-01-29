@@ -288,7 +288,6 @@ oplus_sys_stability_helper.ko
 oplus_wificapcenter.ko
 oplus_wifi_wsa.ko
 thermal_pa_adc.ko
-qca_cld3_peach.ko
 qca_cld3_peach_v2.ko
 cnss2.ko
 cnss_plat_ipc_qmi_svc.ko
@@ -390,7 +389,6 @@ radio-i2c-rtc6226-qca.ko
 btfmcodec.ko
 btfm_slim_codec.ko
 bt_fm_swr.ko
-qca_cld3_peach.ko
 qca_cld3_peach_v2.ko
 cnss2.ko
 cnss_plat_ipc_qmi_svc.ko
@@ -503,12 +501,10 @@ msm_drm.ko
 frpc-adsprpc.ko
 stm_st54se_gpio.ko
 msm-eva.ko
-qbt_handler.ko
 msm_ext_display.ko
 sync_fence.ko
 msm_hw_fence.ko
 msm-mmrm.ko
-stm_nfc_i2c.ko
 nxp-nci.ko
 qcedev-mod_dlkm.ko
 qcrypto-msm_dlkm.ko
@@ -523,9 +519,5 @@ spss_utils.ko
 synx-driver.ko
 ipclite.ko
 ipclite_test.ko
-goodix_ts.ko
-atmel_mxt_ts.ko
-st_fts.ko
-qts.ko
 msm_video.ko
 msm_kgsl.ko
