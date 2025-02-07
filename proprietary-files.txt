@@ -2046,11 +2046,6 @@ vendor/bin/vendor_modprobe.sh
 vendor/etc/init/hw/init.qti.kernel.rc
 vendor/etc/init/hw/init.qti.kernel.target.rc
 
-# IR
-odm/bin/hw/android.hardware.ir-service
-odm/etc/init/android.hardware.ir-service.rc
-odm/etc/vintf/manifest/android.hardware.ir-service.xml
-
 # Keymaster
 vendor/bin/hw/android.hardware.security.keymint-service-qti
 vendor/etc/init/android.hardware.security.keymint-service-qti.rc
