@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from OnePlus 13 (PJZ110_15.0.0.502(CN01)).
+## are from OnePlus 13 (CPH2653_15.0.0.405(EX01)).
 
 # ACDBs
 vendor/etc/acdbdata/ffv_models/ffv__7.1.1_0.1__eai_4.8_enpu_v5.pmd
@@ -179,7 +179,6 @@ odm/etc/camera/ancsegbase/anc_cl_kernel.cache
 odm/etc/camera/ancsegbase/ancsegmulti_2_model.data
 odm/etc/camera/ancsegbase/ancsegmulti_5_model.data
 odm/etc/camera/ancsegbase/model.data
-odm/etc/camera/asd/ai_perception_scene_detect.bin
 odm/etc/camera/asd/class.dlc
 odm/etc/camera/asd/class_fullfov.dlc
 odm/etc/camera/asd/detect.dlc
@@ -686,8 +685,6 @@ odm/etc/camera/meishe_lut/vivid-lut.cube.rgb.bin
 odm/etc/camera/meishe_lut/vivid-warm.cube.rgb.bin
 odm/etc/camera/model/DocDetectV15.xbin
 odm/etc/camera/model/license.lic
-odm/etc/camera/omoji/assets/sdk_assets/ai_face_processor_e51.bundle
-odm/etc/camera/omoji/assets/sdk_assets/controller_cpp.bundle
 odm/etc/camera/pfb_bin/BeardSharp.bin
 odm/etc/camera/pfb_bin/BeardSharp.frag;MODULE_SUFFIX=.frag
 odm/etc/camera/pfb_bin/BeardSharp.vert;MODULE_SUFFIX=.vert
@@ -1476,9 +1473,10 @@ vendor/etc/ssg/tz_whitelist.json
 vendor/lib64/libtaautoload.so
 
 # Context Hub
+odm/etc/init/android.hardware.contexthub-service.qmi.rc
+odm/etc/vintf/manifest/android.hardware.contexthub-service.qmi.xml
 vendor/bin/hw/android.hardware.contexthub-service.qmi
 vendor/etc/chre/preloaded_nanoapps.json
-vendor/etc/init/android.hardware.contexthub-service.qmi.rc
 
 # Data
 vendor/bin/adpl
@@ -1689,8 +1687,6 @@ vendor/lib64/vendor.qti.hardware.dsp-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.dsp@1.0.so
 
 # DSP modules
-vendor/lib/rfs/dsp/libnsp_ipc_cdsp_skel.so
-vendor/lib/rfs/dsp/libnspsuperresolutionproviderextension.so
 vendor/lib64/rfs/dsp/libQ6MSFR_manager_skel.so
 vendor/lib64/rfs/dsp/libVppAisQnnHtp.so
 vendor/lib64/rfs/dsp/libVppFrcQnnHtp.so
@@ -1750,8 +1746,8 @@ vendor/firmware/evass.mbn
 vendor/firmware/evass.mdt
 
 # eUICC
-#my_product/etc/permissions/EuiccGoogle_grant_permissions_list.xml:product/etc/permissions/privapp-permissions-euiccgoogle.xml
-#my_product/priv-app/EuiccGoogle/EuiccGoogle.apk:product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
+my_product/etc/permissions/EuiccGoogle_grant_permissions_list.xml:product/etc/permissions/privapp-permissions-euiccgoogle.xml
+my_product/priv-app/EuiccGoogle/EuiccGoogle.apk:product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
 # Face
 odm/bin/hw/vendor.oplus.hardware.biometrics.face@1.0-service_uff
@@ -1945,10 +1941,10 @@ system_ext/etc/init/horae.rc
 system_ext/lib64/vendor.oplus.hardware.displaypanelfeature@1.0.so
 
 # Hotword Enrollment
-#my_product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml:product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml
-#my_product/framework/com.android.hotwordenrollment.common.util.jar:product/framework/com.android.hotwordenrollment.common.util.jar
-#my_product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk:product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk
-#my_product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk:product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk
+my_product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml:product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml
+my_product/framework/com.android.hotwordenrollment.common.util.jar:product/framework/com.android.hotwordenrollment.common.util.jar
+my_product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk:product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk
+my_product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk:product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk
 
 # Identity
 vendor/bin/hw/android.hardware.identity-service-qti
