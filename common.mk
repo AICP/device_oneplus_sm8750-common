@@ -53,6 +53,7 @@ PRODUCT_PACKAGES += \
     libvolumelistener
 
 PRODUCT_PACKAGES += \
+    libalsautilsv2.vendor \
     libbundleaidl \
     libdownmixaidl \
     libdynamicsprocessingaidl \
