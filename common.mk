@@ -37,20 +37,27 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     audioadsprpcd \
+    audiohalservice.qti \
     libagm_compress_plugin \
     libagm_mixer_plugin \
     libagm_pcm_plugin \
-    libats \
+    libagmipcservice \
+    libaudiochargerlistener \
     libbatterylistener \
+    libcustomva_intf \
     libfmpal \
     libhfp_pal \
     libhotword_intf \
     libmediautils_vendor.vendor \
+    libpaleventnotifier \
+    libpalipcservice \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libsndcardparser \
-    libvolumelistener
+    libsoundtriggerhal.qti \
+    libvolumelistener \
+    libvui_intf
 
 PRODUCT_PACKAGES += \
     libalsautilsv2.vendor \
