@@ -54,7 +54,7 @@ persist.data.df.ul_mode=5
 persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 persist.vendor.data.mode=concurrent
-persist.vendor.data.mutualex.mode=wifipreferred
+persist.vendor.data.mutualex.mode=disabled
 
 # Radio
 persist.radio.hvolte.enable=1

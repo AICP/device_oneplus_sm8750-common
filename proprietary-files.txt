@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from OnePlus 13 (CPH2653_15.0.0.405(EX01)).
+## are from OnePlus 13 (CPH2653_15.0.0.821(EX01)).
 
 # Current blobs with ELF checks disabled:
 # libar-pal depends on libagmclient and libar-gsl, which are gnu makefile targets
@@ -156,6 +156,7 @@ odm/etc/camera/ancsegbase/anc_cl_kernel.cache
 odm/etc/camera/ancsegbase/ancsegmulti_2_model.data
 odm/etc/camera/ancsegbase/ancsegmulti_5_model.data
 odm/etc/camera/ancsegbase/model.data
+odm/etc/camera/asd/ai_perception_scene_detect.bin
 odm/etc/camera/asd/class.dlc
 odm/etc/camera/asd/class_fullfov.dlc
 odm/etc/camera/asd/detect.dlc
@@ -757,6 +758,7 @@ odm/etc/camera/Vega_Align_occlusion.model
 odm/etc/camera/Vega_Attribute_Face_RGB.model
 odm/etc/camera/Vega_Detect_AnimalBodyFaceEye_Gray.model
 odm/etc/camera/Vega_Detect_CommonFace_BGR.model
+odm/etc/camera/Vega_Detect_CommonFace_BGR_PZ.model
 odm/etc/camera/Vega_Front_Align_occlusion.model
 odm/etc/camera/Vega_Refine_RectQuality_AnimalBodyFaceEye.model
 odm/etc/camera/Vega_Track_AnimalsBodyFaceEye_Gray.model
@@ -903,6 +905,7 @@ odm/lib64/libUpScale.so
 odm/lib64/libWaterMark.so
 odm/lib64/lib_rectify.so
 odm/lib64/libaecCustom.so
+odm/lib64/libai_perception_scene_detect.so
 odm/lib64/libaisal.so
 odm/lib64/libaisd.so
 odm/lib64/libaisd_fullfov.so
@@ -938,6 +941,8 @@ odm/lib64/libc++_shared.so
 odm/lib64/libcam.oplus.3a.v2.so
 odm/lib64/libcam.oplus.3a.v3.so
 odm/lib64/libcreatebin.so
+odm/lib64/libcreatebinForBaseretouch.so
+odm/lib64/libcreatebinForFaceretouch.so
 odm/lib64/libcvface_api.so
 odm/lib64/libeffect_custom.so
 odm/lib64/libexif-jpeg-aps.so
@@ -1687,6 +1692,7 @@ vendor/lib64/rfs/dsp/libscveT2T_skel.so
 vendor/lib64/rfs/dsp/libvpp_ais.so
 vendor/lib64/rfs/dsp/libvpp_ais_networks.so
 vendor/lib64/rfs/dsp/libvpp_frc.so
+vendor/lib64/rfs/dsp/libvpp_gfrc_networks.so
 vendor/lib64/rfs/dsp/libvpp_svc_skel.so
 vendor/lib64/rfs/dsp/libvpp_vqa_networks.so
 vendor/lib64/rfs/dsp/libworker_pool.so
@@ -1808,6 +1814,10 @@ vendor/firmware/gen80000_gmu.bin
 vendor/firmware/gen80000_sqe.fw
 vendor/firmware/gen80000_zap.mbn
 vendor/firmware/gmu_gen70900.bin
+vendor/gpu/kbc/sequence_manifest.bin
+vendor/gpu/kbc/unified_kbcs_32.bin
+vendor/gpu/kbc/unified_kbcs_64.bin
+vendor/gpu/kbc/unified_ksqs.bin
 
 # Graphics (Vulkan)
 vendor/lib64/hw/vulkan.adreno.so
@@ -2121,9 +2131,9 @@ odm/etc/nfc/libnfc-mtp-SN220.conf_23821:vendor/etc/libnfc-nxp.conf
 odm/etc/nfc/libnfc-nci.conf_23821:vendor/etc/libnfc-nci.conf
 
 # OPLUS Charger
-odm/bin/hw/vendor.oplus.hardware.charger-V6-service
+odm/bin/hw/vendor.oplus.hardware.charger-V7-service
 odm/bin/hw/wlschgd
-odm/etc/init/vendor.oplus.hardware.charger-V6-service.rc
+odm/etc/init/vendor.oplus.hardware.charger-V7-service.rc
 odm/etc/vintf/manifest/manifest_oplus_charger_aidl.xml
 odm/etc/charge.cfg
 odm/lib64/libGaiaClient_vnd.so
