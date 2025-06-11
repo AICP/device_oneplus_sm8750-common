@@ -6,7 +6,10 @@
 cc_library_static {
     name: "libinit_oplus",
     recovery_available: true,
-    shared_libs: ["libbase"],
+    shared_libs: [
+        "libbase",
+        "libfs_mgr",
+    ],
     srcs: ["init_oplus.cpp"],
 }
 

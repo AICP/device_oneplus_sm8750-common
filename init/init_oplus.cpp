@@ -4,7 +4,13 @@
  */
 
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
 #include <android-base/properties.h>
+
+#include <fs_mgr.h>
+
+#include <string>
+#include <unordered_map>
 
 namespace android {
 namespace init {
@@ -12,8 +18,19 @@ uint32_t InitPropertySet(const std::string& name, const std::string& value);
 }  // namespace init
 }  // namespace android
 
-using android::base::GetProperty;
+using android::base::ParseInt;
+using android::fs_mgr::GetKernelCmdline;
 using android::init::InitPropertySet;
+
+namespace {
+constexpr std::string kCmdlineRegion = "oplus_region";
+const std::unordered_map<int, std::string> kRegionMap = {
+        {26, "NA"},
+        {27, "IN"},
+        {68, "EU"},
+        {151, "CN"},
+};
+}  // anonymous namespace
 
 /*
  * Only for read-only properties. Properties that can be wrote to more
@@ -21,24 +38,22 @@ using android::init::InitPropertySet;
  * after the original property has been set.
  */
 void vendor_process_bootenv() {
-    auto hw_region_id = std::stoi(GetProperty("ro.boot.hw_region_id", "0"));
-    auto prjname = std::stoi(GetProperty("ro.boot.prjname", "0"));
+    std::string buf;
+    if (!GetKernelCmdline(kCmdlineRegion, &buf)) {
+        LOG(ERROR) << kCmdlineRegion << " not found in /proc/cmdline";
+        return;
+    }
 
-    switch (hw_region_id) {
-        case 21: // CN_IN
-            if (prjname == 22811) { // CN
-                InitPropertySet("ro.boot.hardware.revision", "CN");
-            } else if (prjname == 22861) { // IN
-                InitPropertySet("ro.boot.hardware.revision", "IN");
-            }
-            break;
-        case 22: // EU
-            InitPropertySet("ro.boot.hardware.revision", "EU");
-            break;
-        case 23: // NA
-            InitPropertySet("ro.boot.hardware.revision", "NA");
-            break;
-        default:
-            LOG(ERROR) << "Unexpected region ID: " << hw_region_id;
+    int region_id;
+    if (!ParseInt(buf, &region_id)) {
+        LOG(ERROR) << "Region ID [" << buf << "] is invalid";
+        return;
+    }
+
+    auto it = kRegionMap.find(region_id);
+    if (it == kRegionMap.end()) {
+        LOG(ERROR) << "Unexpected region ID: " << region_id;
+    } else {
+        InitPropertySet("ro.boot.hardware.revision", it->second);
     }
 }
