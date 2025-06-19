@@ -1,5 +1,6 @@
 # Audio
 qcom.hw.aac.encoder=true
+ro.audio.ihaladaptervendorextension_enabled=true
 ro.oplus.audio.aidl_volume=true
 tunnel.audio.encode=true
 use.voice.path.for.pcm.voip=true

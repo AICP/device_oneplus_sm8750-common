@@ -57,7 +57,8 @@ PRODUCT_PACKAGES += \
     libsndcardparser \
     libsoundtriggerhal.qti \
     libvolumelistener \
-    libvui_intf
+    libvui_intf \
+    qtiaudiohalvendorextn
 
 PRODUCT_PACKAGES += \
     libalsautilsv2.vendor \
