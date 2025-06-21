@@ -63,8 +63,8 @@ vendor/lib64/hw/audio/libQnnHtp.so;MODULE_SUFFIX=.audio
 vendor/lib64/hw/audio/libQnnHtpV79Skel.so;MODULE_SUFFIX=.audio
 vendor/lib64/hw/audio/libQnnHtpV79Stub.so;MODULE_SUFFIX=.audio
 vendor/lib64/hw/audio/libQnnSystem.so;MODULE_SUFFIX=.audio
-vendor/lib64/hw/libaudiocorehal.default.so
-vendor/lib64/hw/libaudiocorehal.qti.so
+vendor/lib64/hw/libaudiocorehal.default.so;DISABLE_CHECKELF
+vendor/lib64/hw/libaudiocorehal.qti.so;DISABLE_CHECKELF
 vendor/lib64/hw/libaudioeffecthal.qti.so
 vendor/lib64/libPeripheralStateUtils.so
 vendor/lib64/libVoiceSdk.so
@@ -131,7 +131,7 @@ vendor/lib64/vendor.qti.hardware.fm@1.0.so
 
 # Bluetooth (A2DP)
 vendor/lib64/hw/android.hardware.bluetooth.audio-impl-qti.so
-vendor/lib64/hw/android.hardware.bluetooth.audio_sw.so
+vendor/lib64/hw/android.hardware.bluetooth.audio_sw.so;DISABLE_CHECKELF
 vendor/lib64/hw/audio.bluetooth_qti.default.so
 vendor/lib64/btaudio_offload_if.so
 vendor/lib64/libbluetooth_audio_session_aidl_qti.so

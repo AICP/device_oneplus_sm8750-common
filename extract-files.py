@@ -55,6 +55,7 @@ lib_fixups: lib_fixups_user_type = {
         'libar-acdb',
         'libar-gsl',
         'libats',
+        'libaudioserviceexampleimpl',
         'liblx-osal',
         'libvui_intf',
     ): lib_fixup_remove,
