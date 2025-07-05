@@ -10,19 +10,10 @@ persist.bluetooth.oplus.export.nv_overwrite_region=true
 persist.vendor.bluetooth.modem_nv_support=true
 
 # Display
-ro.vendor.display.sensortype=2
 vendor.display.disable_noise_layer=1
 vendor.display.disable_spec_fence=1
-vendor.display.enable_dcc=1000000000000
-vendor.display.enable_demura=1
-vendor.display.enable_hist_intr=1
-vendor.display.enable_spr_bypass=0
-vendor.display.enable_spr=1
-vendor.display.force_lm_to_fb_config=1
 vendor.display.force_tonemapping=1
-vendor.display.pdfr=1
 vendor.display.smomo_game_support=0
-vendor.display.uir_support=1
 
 # Radio
 persist.vendor.radio.force_on_dc=true
