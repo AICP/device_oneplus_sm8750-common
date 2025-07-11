@@ -64,23 +64,6 @@ lib_fixups: lib_fixups_user_type = {
 blob_fixups: blob_fixups_user_type = {
     'odm/bin/hw/vendor.oplus.hardware.biometrics.fingerprint@2.1-service_uff': blob_fixup()
         .add_needed('libshims_aidl_fingerprint_v3.oplus.so'),
-    'odm/lib64/libAlgoProcess.so': blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V5-ndk.so', 'android.hardware.graphics.common-V6-ndk.so'),
-    (
-        'odm/lib64/libAncHumanSegFigureFusion.so',
-        'odm/lib64/libEIS.so',
-        'odm/lib64/libHIS.so',
-        'odm/lib64/libOPAlgoCamAiBeautyFaceRetouchCn.so',
-        'odm/lib64/libOPAlgoCamAiUnifySkin.so',
-        'odm/lib64/libOPAlgoCamFaceBeautyCap.so',
-    ): blob_fixup()
-        .clear_symbol_version('AHardwareBuffer_acquire')
-        .clear_symbol_version('AHardwareBuffer_allocate')
-        .clear_symbol_version('AHardwareBuffer_describe')
-        .clear_symbol_version('AHardwareBuffer_lock')
-        .clear_symbol_version('AHardwareBuffer_lockPlanes')
-        .clear_symbol_version('AHardwareBuffer_release')
-        .clear_symbol_version('AHardwareBuffer_unlock'),
     'product/etc/sysconfig/com.android.hotwordenrollment.common.util.xml': blob_fixup()
         .regex_replace('/my_product', '/product'),
     'system_ext/bin/wfdservice64': blob_fixup()
@@ -97,14 +80,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/etc/seccomp_policy/gnss@2.0-qsap-location.policy': blob_fixup()
         .add_line_if_missing('sched_get_priority_min: 1')
         .add_line_if_missing('sched_get_priority_max: 1'),
-    (
-        'vendor/lib64/camera/components/com.qti.node.dewarp.so',
-        'vendor/lib64/hw/com.qti.chi.override.so',
-        'vendor/lib64/libcamximageformatutils.so',
-        'vendor/lib64/libchifeature2.so',
-        'vendor/lib64/vendor.qti.hardware.camera.offlinecamera-service-impl.so',
-    ): blob_fixup()
-        .replace_needed('android.hardware.graphics.allocator-V1-ndk.so', 'android.hardware.graphics.allocator-V2-ndk.so'),
     'vendor/lib64/hw/libaudiocorehal.qti.so': blob_fixup()
         .replace_needed('android.hardware.audio.core.sounddose-V1-ndk.so', 'android.hardware.audio.core.sounddose-V2-ndk.so')
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V3-ndk.so')
