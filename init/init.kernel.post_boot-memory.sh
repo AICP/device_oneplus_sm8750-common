@@ -78,8 +78,8 @@ function oplus_configure_zram_parameters() {
     MemTotal=${MemTotalStr:16:8}
 
     echo lz4 > /sys/block/zram0/comp_algorithm
-    echo 160 > /sys/module/zram_opt/parameters/vm_swappiness
-    echo 60 > /sys/module/zram_opt/parameters/direct_vm_swappiness
+    echo 160 > /sys/module/oplus_bsp_zram_opt/parameters/vm_swappiness
+    echo 60 > /sys/module/oplus_bsp_zram_opt/parameters/direct_vm_swappiness
     echo 0 > /proc/sys/vm/page-cluster
 
     if [ -f /sys/block/zram0/disksize ]; then
@@ -138,7 +138,7 @@ function oplus_configure_tuning_swappiness() {
 	local para_path=/proc/sys/vm
 	local kernel_version=`uname -r`
 
-	if [[ "$kernel_version" == "6.1"* ]]; then
+	if [[ "$kernel_version" == "6.6"* ]]; then
 		para_path=/sys/module/oplus_bsp_zram_opt/parameters
 	fi
 
@@ -271,16 +271,7 @@ function configure_memory_parameters() {
 	# Set Memory parameters.
 
 #ifdef OPLUS_FEATURE_ZRAM_OPT
-	# For vts test which has replace system.img
-	if [ -L "/product" ]; then
-		oplus_configure_zram_parameters
-	else
-		if [ -f /sys/block/zram0/hybridswap_enable ]; then
-			oplus_configure_hybridswap
-		else
-			oplus_configure_zram_parameters
-		fi
-	fi
+	oplus_configure_zram_parameters
 	oplus_configure_tuning_swappiness
 #else
 	# configure_zram_parameters
