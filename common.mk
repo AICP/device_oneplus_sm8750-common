@@ -222,6 +222,9 @@ PRODUCT_PACKAGES += \
     fstab.default \
     fstab.default.vendor_ramdisk \
     init.class_main.sh \
+    init.kernel.post_boot-memory.sh \
+    init.kernel.post_boot-sun.sh \
+    init.kernel.post_boot-sun_default_6_2.sh \
     init.oplus.rc \
     init.qcom.early_boot.sh \
     init.qcom.rc \
