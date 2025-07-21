@@ -107,8 +107,8 @@ function oplus_configure_zram_parameters() {
             #config 3GB zramsize with ramsize 6GB
             echo 3221225472 > /sys/block/zram0/disksize
         else
-            #config 4GB zramsize with ramsize >=8GB
-            echo 4294967296 > /sys/block/zram0/disksize
+            #config 6GB zramsize with ramsize >=8GB
+            echo 6442450944 > /sys/block/zram0/disksize
         fi
         mkswap /dev/block/zram0
         swapon /dev/block/zram0 -p 32758
