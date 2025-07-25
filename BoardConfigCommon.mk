@@ -86,7 +86,8 @@ BOARD_KERNEL_CMDLINE := \
     log_buf_len=2M \
     nohugevmalloc \
     nosoftlockup \
-    qcom_geni_serial.con_enabled=0
+    qcom_geni_serial.con_enabled=0 \
+    sysctl.kernel.firmware_config.force_sysfs_fallback=1
 
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_KERNEL_BASE := 0x00000000
