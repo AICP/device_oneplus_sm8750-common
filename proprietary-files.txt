@@ -290,20 +290,12 @@ vendor/lib64/vendor.qti.diaghal-V1-ndk.so;MODULE_SUFFIX=_vendor
 odm/etc/display/cwb_weightspos.json
 odm/etc/vintf/manifest/manifest_oplus_cwb_aidl.xml
 vendor/bin/hw/vendor.qti.hardware.display.color-service
-vendor/bin/hw/vendor.qti.hardware.display.composer-service;REQUIRED=vendor.qti.hardware.display.composer-service.rc,vendor.qti.hardware.display.composer-service.xml
 vendor/etc/init/vendor.qti.hardware.display.color-service.rc
 vendor/lib64/libcwb_client_vendor.so
 vendor/lib64/libcwb_qcom_aidl.so
 vendor/lib64/libhdrvivid.so
-vendor/lib64/libhistogram.so
 vendor/lib64/libhwcsensor.so
-vendor/lib64/libqdutils.so
-vendor/lib64/libsdedrm.so
 vendor/lib64/libsdm-brightnessaware-parser.so
-vendor/lib64/libsdmclient.so
-vendor/lib64/libsdmcore.so
-vendor/lib64/libsdmdal.so
-vendor/lib64/libsdmutils.so
 vendor/lib64/vendor.oplus.hardware.cwb-V1-ndk.so
 vendor/lib64/vendor.oplus.hardware.cwb@1.0.so
 
