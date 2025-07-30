@@ -101,7 +101,8 @@ TARGET_KERNEL_SOURCE := kernel/oneplus/sm8750
 TARGET_KERNEL_ADDITIONAL_FLAGS := CONFIG_OPLUS_DEVICE_DTBS=y
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
-    vendor/sun_perf.config
+    vendor/sun_perf.config \
+    vendor/oplus/sun_perf.config
 
 # Kernel modules
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell sed 's/#.*$$//;/^$$/d' $(COMMON_PATH)/modules.load.system_dlkm))
@@ -111,8 +112,7 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODU
 # qrtr-gunyah.ko is detected by depmod of build_utils.sh in kleaf
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := \
     $(strip $(shell sed 's/#.*$$//;/^$$/d' $(COMMON_PATH)/modules.list.msm.sun)) \
-    qrtr-gunyah.ko \
-    $(strip $(shell cat $(COMMON_PATH)/modules.vendor_boot.list.oplus))
+    qrtr-gunyah.ko
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 SYSTEM_KERNEL_MODULES := \
@@ -121,6 +121,7 @@ SYSTEM_KERNEL_MODULES := \
 
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/oneplus/sm8750-modules
 TARGET_KERNEL_EXT_MODULES := \
+    oplus/kernel/device_info/oplus_fpga/fpga_monitor:kbuild \
     qcom/opensource/mmrm-driver \
     qcom/opensource/mm-drivers/hw_fence \
     qcom/opensource/mm-drivers/msm_ext_display \
@@ -149,53 +150,29 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/wlan/platform \
     qcom/opensource/wlan/qcacld-3.0 \
     qcom/opensource/bt-kernel \
-    nxp/opensource/driver \
-    st/opensource/eSE-driver
+    nxp/opensource/driver
 
 TARGET_KERNEL_EXT_MODULES += \
-    oplus/kernel/boot/oplus_phoenix:kbuild \
+    oplus/hardware/radio/kernel/mdmfeature:kbuild \
     oplus/kernel/camera:kbuild \
-    oplus/kernel/cpu/freqqos_monitor:kbuild \
-    oplus/kernel/cpu/game_opt:kbuild \
-    oplus/kernel/cpu/midas/v1_gki:kbuild \
     oplus/kernel/cpu/thermal:kbuild \
     oplus/kernel/device_info/cs_press:kbuild \
     oplus/kernel/device_info/magnetic_cover:kbuild \
-    oplus/kernel/device_info/oplus_fpga/fpga_monitor:kbuild \
+    oplus/kernel/device_info/pogo_keyboard:kbuild \
     oplus/kernel/device_info/tri_state_key:kbuild \
     oplus/kernel/dfr:kbuild \
-    oplus/kernel/framework_stability/oplus_stability_helper \
     oplus/kernel/graphics:kbuild \
-    oplus/kernel/hans \
-    oplus/kernel/ipc:kbuild \
-    oplus/kernel/mm:kbuild \
-    oplus/kernel/network/data_module \
-    oplus/kernel/network/linkpower_module \
-    oplus/kernel/network/oplus_apps_monitor \
-    oplus/kernel/network/oplus_dns_hook \
-    oplus/kernel/network/oplus_game_first \
     oplus/kernel/network/oplus_network_oem_qmi:kbuild \
     oplus/kernel/network/oplus_network_esim:kbuild \
     oplus/kernel/network/oplus_network_sim_detect:kbuild \
-    oplus/kernel/network/oplus_network_tuning \
-    oplus/kernel/network/oplus_qr_scan \
     oplus/kernel/network/oplus_rf_cable_monitor:kbuild \
-    oplus/kernel/network/oplus_score \
-    oplus/kernel/network/oplus_stats_calc \
-    oplus/kernel/network/oplus_vnet \
-    oplus/kernel/power/power_hook \
-    oplus/kernel/secureguard/gki2.0/rootguard_new \
-    oplus/kernel/synchronize:kbuild \
     oplus/kernel/touchpanel/oplus_touchscreen_v2/touch_custom:kbuild \
     oplus/kernel/touchpanel/oplus_touchscreen_v2:kbuild \
     oplus/kernel/touchpanel/synaptics_hbp:kbuild \
-    oplus/kernel/wifi/oplus_connectivity_routerboost \
-    oplus/kernel/wifi/oplus_connectivity_sla \
-    oplus/kernel/wifi/oplus_wifi_wsa \
-    oplus/kernel/wifi/oplus_wificapcenter \
+    oplus/kernel/tp/hbp/hbp:kbuild \
     oplus/secure/biometrics/fingerprints/bsp/uff/driver:kbuild \
     oplus/secure/common/bsp/drivers/oplus_secure_common \
-    oplus/sensor/kernel/qcom/oplus_consumer_ir:kbuild \
+    oplus/sensor/kernel/oplus_consumer_ir:kbuild \
     oplus/sensor/kernel/qcom/sensor:kbuild
 
 # Platform
