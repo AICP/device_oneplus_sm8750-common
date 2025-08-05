@@ -376,7 +376,9 @@ system/etc/permissions/uimremoteserver.xml
 odm/etc/vintf/manifest/secure_element-service.xml
 vendor/bin/hw/android.hardware.secure_element-service.qti
 vendor/etc/init/android.hardware.secure_element-service.qti.rc
+vendor/etc/permissions/com.android.se.xml
 vendor/etc/vintf/manifest/android.hardware.secure_element.xml
+vendor/etc/vintf/manifest/secure_element-service.xml:vendor/etc/vintf/manifest/secure_element-service-omapi.xml
 vendor/lib64/hw/libEseUtils.so
 vendor/lib64/libGPMTEEC_vendor.so
 vendor/lib64/libGPQeSE.so
