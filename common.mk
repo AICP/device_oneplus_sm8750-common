@@ -315,7 +315,8 @@ PRODUCT_PACKAGES += \
 
 ifneq ($(TARGET_IS_TABLET),true)
 PRODUCT_PACKAGES += \
-    CarrierConfigResCommon
+    CarrierConfigResCommon \
+    FrameworksResTargetEuicc
 endif
 
 # Partitions
