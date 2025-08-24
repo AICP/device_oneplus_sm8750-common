@@ -746,13 +746,9 @@ odm/lib64/vendor.oplus.hardware.stability.oplus_project-V2-ndk.so
 vendor/lib64/vendor.oplus.hardware.stability.oplus_project-V1-ndk.so
 
 # OPLUS URCC
-odm/bin/hw/vendor.oplus.hardware.urcc-service
-odm/etc/init/vendor.oplus.hardware.urcc-service.rc
 odm/etc/uah/uahconfig.pb
-odm/etc/vintf/manifest/vendor.oplus.hardware.urcc-service.xml
 odm/lib64/liboplus-uah-client.so
 odm/lib64/libuahcore.so
-odm/lib64/liburcccore.so
 odm/lib64/vendor.oplus.hardware.urcc-V1-ndk.so
 
 # PD
