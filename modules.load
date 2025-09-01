@@ -220,6 +220,7 @@ oplus_bsp_synaptics_tcm2.ko
 oplus_bsp_tp_common.ko
 oplus_bsp_tp_custom.ko
 oplus_bsp_tp_focal_common.ko
+oplus_bsp_tp_ft3419u.ko
 oplus_bsp_tp_ft3518.ko
 oplus_bsp_tp_ft3658u_spi.ko
 oplus_bsp_tp_ft3681.ko
@@ -228,6 +229,7 @@ oplus_bsp_tp_ft8057p.ko
 oplus_bsp_tp_goodix_comnon.ko
 oplus_bsp_tp_gt9916.ko
 oplus_bsp_tp_gt9966.ko
+oplus_bsp_tp_hbp_syna_s3910.ko
 oplus_bsp_tp_ilitek7807s.ko
 oplus_bsp_tp_ilitek_common.ko
 oplus_bsp_tp_novatek_common.ko
