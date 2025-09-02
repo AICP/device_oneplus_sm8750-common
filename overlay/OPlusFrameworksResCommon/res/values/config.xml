@@ -58,11 +58,7 @@
     </integer-array>
 
     <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
-    <integer-array name="config_availableColorModes">
-        <item>303</item>
-        <item>301</item>
-        <item>307</item>
-    </integer-array>
+    <integer-array name="config_availableColorModes" />
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
