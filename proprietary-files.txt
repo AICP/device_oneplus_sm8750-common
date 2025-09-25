@@ -1103,14 +1103,6 @@ odm/etc/init/vendor-oplus-hardware-touch-V2-service.rc
 odm/etc/vintf/manifest/manifest_touch_aidl.xml
 odm/lib64/libtensorflowlite_oplus.so
 
-# UFS
-odm/firmware/ufs/SAMSUNG-KLUFG4NHHB-F0G1.bin
-odm/firmware/ufs/SKhynix-HN8T174EJKX075.bin
-odm/firmware/ufs/SKhynix-HN8T274EJKX130.bin
-odm/firmware/ufs/SKhynix-HN8T374ZJKX141.bin
-odm/firmware/ufs/move_target_ufs_fw_to_oplusreserve1.sh
-odm/firmware/ufs/ufs_version_config.xml
-
 # Video
 vendor/lib64/libstreamparser.so
 vendor/lib64/libvideooptfeature.so
