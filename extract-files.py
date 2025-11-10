@@ -32,9 +32,6 @@ namespace_imports = [
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
 
-def lib_fixup_odm_suffix(lib: str, partition: str, *args, **kwargs):
-    return f'{lib}_{partition}' if partition == 'odm' else None
-
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
@@ -46,9 +43,6 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.qccsyshal_aidl-V1-ndk',
         'vendor.qti.qccvndhal_aidl-V1-ndk',
     ): lib_fixup_vendor_suffix,
-    (
-        'vendor.oplus.hardware.displaypanelfeature-V1-ndk',
-    ): lib_fixup_odm_suffix,
     (
         'libagm',
         'libagmclient',
@@ -71,6 +65,8 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace(r'-e "zram" -e "zsmalloc"', ''),
     'vendor/bin/vendor_modprobe.sh': blob_fixup()
         .regex_replace(r'\n.*OPLUS_FEATURE_WIFI_FTM[\s\S]*?OPLUS_FEATURE_WIFI_FTM.*\n', ''),
+    'vendor/etc/clstc_config_library.xml': blob_fixup()
+        .regex_replace(r'\n.*OPLUS_FEATURE_DSIPLAY[\s\S]*?OPLUS_FEATURE_DSIPLAY.*\n', ''),
     'vendor/etc/media_codecs_sun.xml': blob_fixup()
         .regex_replace('.*media_codecs_(google_audio|google_c2|google_telephony|google_video|vendor_audio).*\n', ''),
     'vendor/etc/seccomp_policy/gnss@2.0-qsap-location.policy': blob_fixup()
