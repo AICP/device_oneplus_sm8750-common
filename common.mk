@@ -65,6 +65,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libalsautilsv2.vendor \
+    libaudioutils_shim \
     libbundleaidl \
     libdownmixaidl \
     libdynamicsprocessingaidl \
