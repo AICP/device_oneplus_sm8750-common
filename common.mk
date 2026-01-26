@@ -65,6 +65,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     libalsautilsv2.vendor \
+    libaudioutils_shim \
     libbundleaidl \
     libdownmixaidl \
     libdynamicsprocessingaidl \
@@ -150,7 +151,8 @@ PRODUCT_COPY_FILES += \
 # Doze
 ifneq ($(TARGET_IS_TABLET),true)
 PRODUCT_PACKAGES += \
-    OplusDoze
+    OplusDoze \
+    OplusDozeResCommon
 endif
 
 # DRM
@@ -338,7 +340,8 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
+    android.hardware.power-service-qti \
+    liboplus-uah-client
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/power/config/sun/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
