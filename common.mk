@@ -43,6 +43,7 @@ PRODUCT_PACKAGES += \
     libagm_mixer_plugin \
     libagm_pcm_plugin \
     libagmipcservice \
+    libaudio_aidl_conversion_common_ndk \
     libaudiochargerlistener \
     libbatterylistener \
     libcustomva_intf \
@@ -85,14 +86,11 @@ CONFIG_PAL_SRC_DIR := $(AUDIO_HAL_DIR)/../pal/configs/sun
 CONFIG_SKU_OUT_DIR := $(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_sun
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio/audio_module_config_primary.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_module_config_primary.xml \
     $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_ODM)/etc/audio_policy_configuration.xml
 
 PRODUCT_COPY_FILES += \
-    $(CONFIG_HAL_SRC_DIR)/audio_effects_config.xml:$(CONFIG_SKU_OUT_DIR)/audio_effects_config.xml \
     $(CONFIG_HAL_SRC_DIR)/mem_logger_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mem_logger_config.xml \
     $(CONFIG_HAL_SRC_DIR)/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml \
-    $(CONFIG_HAL_SRC_DIR)/quasar_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/quasar_config.xml \
     $(CONFIG_HAL_SRC_DIR)/vendor_audio_interfaces.xml:$(TARGET_COPY_OUT_VENDOR)/etc/vendor_audio_interfaces.xml \
     $(CONFIG_PAL_SRC_DIR)/Hapticsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/Hapticsconfig.xml \
     $(CONFIG_PAL_SRC_DIR)/card-defs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/card-defs.xml
@@ -111,7 +109,8 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     lib_bt_aptx \
     lib_bt_ble \
-    lib_bt_bundle
+    lib_bt_bundle \
+    libbluetooth_audio_session_aidl_shim
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
@@ -166,15 +165,19 @@ endif
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm-service.clearkey
+    android.hardware.drm-service.clearkey \
+    wvmkiller
 
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
+# Face unlock
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.biometrics.face.xml
+
 # Fastboot
 PRODUCT_PACKAGES += \
-    android.hardware.fastboot-service.example_recovery \
-    fastbootd
+    android.hardware.fastboot-service.example_recovery
 
 # Fingerprint
 ifneq ($(TARGET_IS_TABLET),true)
@@ -253,20 +256,12 @@ PRODUCT_PACKAGES += \
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_oplus)
 
 # Kernel
-PRODUCT_ENABLE_UFFD_GC := true
-
 PRODUCT_COPY_FILES += \
     kernel/oneplus/sm8750/modules.systemdlkm_blocklist.msm.sun:$(TARGET_COPY_OUT_VENDOR_DLKM)/lib/modules/system_dlkm.modules.blocklist
 
-# Keymint
+# Keystore
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore_V3.xml
-
-ifneq ($(TARGET_IS_TABLET),true)
-PRODUCT_PACKAGES += \
-    android.hardware.security.keymint3-service.strongbox.nxp \
-    android.hardware.weaver-service.nxp
-endif
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml \
@@ -297,7 +292,6 @@ PRODUCT_PACKAGES += \
 # NFC
 ifneq ($(TARGET_IS_TABLET),true)
 PRODUCT_PACKAGES += \
-    android.hardware.nfc-service.nxp \
     com.android.nfc_extras \
     Tag
 
@@ -307,8 +301,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
     frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.uicc.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-    frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml
 endif
@@ -362,6 +354,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/power/config/sun/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
+$(call soong_config_set,qtipower,mode_ext_lib,power-ext-oplus)
+
 # QSPA
 PRODUCT_PACKAGES += \
     qspa_vendor.rc \
@@ -370,20 +364,11 @@ PRODUCT_PACKAGES += \
 # Recovery
 $(call soong_config_set_bool,recovery,target_recovery_uses_qti_drm,true)
 
-# SecureElement
-ifneq ($(TARGET_IS_TABLET),true)
-PRODUCT_PACKAGES += \
-    SecureElementResTarget_Vendor
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/permissions/com.android.se.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.se.xml
-endif
-
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors-service.multihal \
     sensors.dynamic_sensor_hal \
-    sensors.qsh_wrapper
+    sensors.fusionlight
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
@@ -532,6 +517,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml
+
+# WiFi firmware symlinks
+PRODUCT_PACKAGES += \
+    firmware_WCNSS_qcom_cfg.ini_symlink
 
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/oneplus/sm8750-common/sm8750-common-vendor.mk)

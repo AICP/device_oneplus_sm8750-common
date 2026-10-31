@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from OnePlus 13 (CPH2653_16.0.10.501(EX01)).
+## are from OnePlus 13 (CPH2653_16.0.10.600(EX01)).
 
 # ACDBs
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_4.2_enpuv5.pmd
@@ -64,6 +64,7 @@ vendor/lib64/libar-pal.so
 vendor/lib64/libarmemlog.so
 vendor/lib64/libaudio_log_utils.so
 vendor/lib64/libaudioplatformconverter.qti.so;DISABLE_DEPS
+vendor/lib64/libaudioserviceexampleimpl.so;DISABLE_DEPS
 vendor/lib64/libcapiv2svacnnvendor.so
 vendor/lib64/libcapiv2svarnnvendor.so
 vendor/lib64/libcapiv2udk7vendor.so
@@ -81,15 +82,6 @@ vendor/lib64/libvui_dmgr.so
 vendor/lib64/libvui_dmgr_client.so
 vendor/lib64/vendor.qti.hardware.ListenSoundModelAidl-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.qasr-V2-ndk.so
-
-# Audio - old AIDL dependencies
-vendor/lib64/android.hardware.bluetooth.audio-impl.so:vendor/lib64/android.hardware.bluetooth.audio-impl_prebuilt.so;FIX_SONAME
-vendor/lib64/libaudio_aidl_conversion_common_ndk.so:vendor/lib64/libaudio_aidl_conversion_common_ndk_prebuilt.so;DISABLE_DEPS;FIX_SONAME
-vendor/lib64/libaudioserviceexampleimpl.so;DISABLE_DEPS
-vendor/lib64/libbluetooth_audio_session_aidl.so:vendor/lib64/libbluetooth_audio_session_aidl_prebuilt.so;FIX_SONAME
-
-# Audio FX modules
-vendor/lib64/soundfx/libquasar.so
 
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@aidl-service-qti
@@ -251,7 +243,6 @@ vendor/bin/feature_enabler_client
 vendor/etc/init/feature_enabler_client.rc
 vendor/etc/2024-10-11_platform_RSA_SM8750_license_d07bab28-156e-49b6-9eda-103eb7c6f6de.pfm
 vendor/etc/platform_RSA_SM8750_license_c8338967-b56e-4693-ae1b-7a17ac371ff6.pfm
-vendor/lib64/libPanelChaplin.so
 
 # Display services
 vendor/bin/hw/vendor.qti.hardware.display.color-service
@@ -335,6 +326,13 @@ vendor/firmware/evass.b19
 vendor/firmware/evass.mbn
 vendor/firmware/evass.mdt
 
+# Face unlock
+odm/bin/hw/vendor.oplus.hardware.biometrics.face@1.0-service_uff
+odm/etc/init/vendor.oplus.hardware.biometrics.face@1.0-service.rc
+odm/etc/vintf/manifest/manifest_oplus_face.xml
+odm/lib64/libstfaceunlockocl_uff.so;DUMMY_SHARED_LIB
+odm/init.oplus.face.rc
+
 # FASTCV
 vendor/lib64/libfastcvdsp_stub.so
 vendor/lib64/libfastcvopt.so
@@ -406,7 +404,6 @@ vendor/lib64/libnsptransactionservice.so
 vendor/lib64/vendor.qti.hardware.hexlp-V1-ndk.so
 
 # Horae
-odm/etc/horae/horae_target.conf
 system/lib64/libostatslog.so:system_ext/lib64/libostatslog.so
 system_ext/bin/horae
 system_ext/etc/horae/horae.conf
@@ -735,8 +732,11 @@ vendor/lib64/libqcbor.so
 vendor/lib64/vendor.qti.hardware.minkipcbinder-V1-ndk.so
 
 # Sensors
+odm/bin/hw/vendor-oplus-hardware-oplusSensor-V1-service
 odm/bin/oplus_sensor_fb
 odm/etc/init/init.oplus.sensor.rc
+odm/etc/init/vendor-oplus-hardware-oplusSensor-V1-service.rc
+odm/etc/vintf/manifest/manifest_oplusSensor_aidl.xml
 odm/lib64/liboplus_service.so
 vendor/bin/hw/vendor.qti.hardware.sensorscalibrate-service
 vendor/bin/init.qcom.sensors.sh
@@ -865,7 +865,6 @@ vendor/etc/init/vendor.qti.tftp.rc
 # Thermal engine
 vendor/bin/thermal-engine-v2
 vendor/etc/init/init_thermal-engine-v2.rc
-vendor/etc/thermal-engine.conf
 vendor/lib64/liblmthermallistner.so
 vendor/lib64/libthermalclient.so
 
@@ -876,11 +875,8 @@ vendor/etc/init/init.time_daemon.rc
 vendor/lib64/libtime_genoff.so
 
 # Touch
-odm/bin/hw/vendor-oplus-hardware-touch-V2-service
 odm/bin/touchDaemon
 odm/etc/init/init.touchDaemon.rc
-odm/etc/init/vendor-oplus-hardware-touch-V2-service.rc
-odm/etc/vintf/manifest/manifest_touch_aidl.xml
 odm/lib64/libtensorflowlite_oplus.so
 
 # Video
@@ -920,42 +916,43 @@ vendor/lib64/libtrustedapploader.so
 # WiFi
 odm/bin/init.oplus.wifi.sh
 odm/etc/init/hw/init.oplus.wifi.rc
-odm/vendor/etc/wifi/WCNSS_qcom_cfg.ini
 vendor/bin/cnss-daemon
 vendor/etc/init/init.vendor.wlan.rc
 vendor/etc/wifi/p2p_supplicant_overlay.conf
 vendor/etc/wifi/vendor_cmd.xml
 vendor/etc/wifi/wpa_supplicant_overlay.conf
 
-# WiFi Display
-system/framework/WfdCommon.jar;BOOT_JAR
-system_ext/bin/wfdservice64
-system_ext/etc/init/wfdservice.rc
-system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml
-system_ext/etc/seccomp_policy/wfdservice64.policy
-system_ext/etc/wfdconfigsink.xml
-system_ext/lib64/libmmrtpdecoder.so
-system_ext/lib64/libmmrtpencoder.so
-system_ext/lib64/libwfdavenhancements.so
-system_ext/lib64/libwfdclient.so
-system_ext/lib64/libwfdcommonutils.so
-system_ext/lib64/libwfdconfigutils.so
-system_ext/lib64/libwfddisplayconfig.so
-system_ext/lib64/libwfdmminterface.so
-system_ext/lib64/libwfdmmsink.so
-system_ext/lib64/libwfdmmsrc_system.so
-system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so
-system_ext/lib64/libwfdrtsp.so
-system_ext/lib64/libwfdservice.so
-system_ext/lib64/libwfdsinksm.so
-system_ext/lib64/libwfduibcinterface.so
-system_ext/lib64/libwfduibcsink.so
-system_ext/lib64/libwfduibcsinkinterface.so
-system_ext/lib64/libwfduibcsrc.so
-system_ext/lib64/libwfduibcsrcinterface.so
-system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so
-system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V1-ndk.so
-system_ext/priv-app/WfdService/WfdService.apk
+# WiFi Display (system) - from marvel_g A171WEH.20
+system/framework/WfdCommon.jar;BOOT_JAR|27251f8421652af8abffb1f3fd9449fe0ec64ee5|6d1f1d953c48a414e978263256e2ed3aec1580b7
+system_ext/bin/wfdservice64|6b738758fe3d21d6d53d3fb522e1321b54592fa9
+system_ext/etc/init/wfdservice.rc|907def8565d8f91f531ca7dfad880af05d540b0c
+system_ext/etc/permissions/wfd-system-ext-privapp-permissions-qti.xml|6669d5ee462c981663b8ac573d84d334e4eed96c
+system_ext/etc/seccomp_policy/wfdservice64.policy|1e331272649395423b11c575892e0bdc9433b820
+system_ext/etc/wfdconfigsink.xml|7bbf8092ff574be7ed951b1a4026471f51e4b6f5
+system_ext/lib64/libmmrtpdecoder.so|51c486b525879c1239062f0fa6b591c3e0abaaa0
+system_ext/lib64/libmmrtpencoder.so|946d85b6b852ee95e17b40b00c4c85ebfa72c85c
+system_ext/lib64/libwfdavenhancements.so|e5a06c6ea07c0cd4ebb73b030b87bf5e51a553e3
+system_ext/lib64/libwfdclient.so|ae443c8657e680558cce30039409cee1e6ab5505
+system_ext/lib64/libwfdcommonutils.so|27c411978b486ccc075862fa2eff450990b9d47a
+system_ext/lib64/libwfdconfigutils.so|d05d03298caf2e233c69689cf1fed0dd19a02be1
+system_ext/lib64/libwfddisplayconfig.so|2717202736b678390be7518ce6f69a63079e4217
+system_ext/lib64/libwfdmminterface.so|b560306dbc7b2bffb734c8eb6439dd3721f75c12
+system_ext/lib64/libwfdmmsink.so|a250fd4085ec04345db8067f11962f57c3b166f0
+system_ext/lib64/libwfdmmsrc_system.so|69e08746a9557ee5fba3e02a8170032db0fa0105
+system_ext/lib64/libwfdnative.so;SYMLINK=system_ext/priv-app/WfdService/lib/arm64/libwfdnative.so|923acb22f26dc3aab5115cf685a161611e43c018
+system_ext/lib64/libwfdrtsp.so|14eec96c4fa615096c473d5a269ba315a53cfd00
+system_ext/lib64/libwfdservice.so|429839b831a8b16fb858179241dc6183c50bdf13|54624fd8c8ef2932e71c4b3ce176fb712e884f5a
+system_ext/lib64/libwfdsinksm.so|e714120166d6480ada0b629ddd73c499c73c55a2
+system_ext/lib64/libwfduibcinterface.so|62a596c93efa57bdc79b078d74a3ccf4d19d1f58
+system_ext/lib64/libwfduibcsink.so|a6fc5d0245e23648812a535f7338d562c9317f09
+system_ext/lib64/libwfduibcsinkinterface.so|2db07ec7a9a6206d2782439e247b35fbe62a550f
+system_ext/lib64/libwfduibcsrc.so|ac3e0988fb5c36c6c4561f04e0e5d53d7de2ad76
+system_ext/lib64/libwfduibcsrcinterface.so|d19e9b5c35f61cc696a9c999dce6eb11d781bd8c
+system_ext/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so|7b3051498476202797fce711a6dcc42ae6a7b8ea
+system_ext/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V2-ndk.so|b2f864d6ae621758bef6f4081af353e2e11e04d8
+system_ext/priv-app/WfdService/WfdService.apk|7d7e4ce1ec07338f1d2abf39035a8f44714a4a40
+
+# WiFi Display (vendor)
 vendor/bin/wfdhdcphalservice
 vendor/bin/wfdvndservice
 vendor/bin/wifidisplayhalservice
